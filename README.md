@@ -52,9 +52,8 @@ X-Api-Key: <Lidarr API key>
 
 Devices and commands live in memory. The shared documents (likes of YouTube Music songs that aren't in the
 library yet, so the phone and the desktop show the same ones) are saved in
-`<Lidarr's config folder>/tonearm-connect/store.json`.
-
-Everything is kept in memory: after a Lidarr restart the apps simply announce themselves again.
+`<Lidarr's config folder>/tonearm-connect/store.json`. After a Lidarr restart the apps simply announce
+themselves again.
 
 ## Build
 

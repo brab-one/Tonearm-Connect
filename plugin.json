@@ -1,7 +1,7 @@
 {
   "id": "tonearm-connect",
   "name": "Tonearm Connect",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Lets the Tonearm apps on your phone and desktop see and control each other through Lidarr.",
   "author": "brab-one",
   "owner": "brab-one",

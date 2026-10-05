@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using FluentValidation.Results;
+using NzbDrone.Common.EnvironmentInfo;
 using NzbDrone.Core.Plugins;
 
 namespace NzbDrone.Core.Notifications.TonearmConnect
@@ -16,8 +18,14 @@ namespace NzbDrone.Core.Notifications.TonearmConnect
     /// </summary>
     public class TonearmConnect : NotificationBase<TonearmConnectSettings>
     {
-        public const int Protocol = 1;
+        /// <summary>2 added the shared store (ops "get" and "put").</summary>
+        public const int Protocol = 2;
         private const int MaxWaitSeconds = 25;
+
+        public TonearmConnect(IAppFolderInfo appFolderInfo)
+        {
+            ConnectStore.Init(Path.Combine(appFolderInfo.AppDataFolder, "tonearm-connect"));
+        }
 
         public override string Name => "Tonearm Connect";
 
@@ -77,6 +85,32 @@ namespace NzbDrone.Core.Notifications.TonearmConnect
                     int.TryParse(Get(query, "wait"), out var wait);
                     var (commands, seq) = ConnectHub.Poll(device, after, TimeSpan.FromSeconds(Math.Clamp(wait, 0, MaxWaitSeconds)));
                     return new { commands = commands.Select(c => new { seq = c.Seq, from = c.From, payload = c.Payload }).ToList(), seq };
+
+                case "get":
+                {
+                    var key = Get(query, "key");
+                    if (!ConnectStore.ValidKey(key))
+                    {
+                        return new { error = "a valid key is required" };
+                    }
+
+                    var entry = ConnectStore.Get(key);
+                    return new { value = entry.Value, version = entry.Version };
+                }
+
+                case "put":
+                {
+                    var key = Get(query, "key");
+                    if (!ConnectStore.ValidKey(key) || payload == null || !long.TryParse(Get(query, "ifVersion"), out var ifVersion))
+                    {
+                        return new { error = "key, ifVersion and payload are required" };
+                    }
+
+                    var (ok, current) = ConnectStore.Put(key, payload, ifVersion);
+                    return ok
+                        ? new { ok = true, conflict = false, value = (string)null, version = current.Version }
+                        : new { ok = false, conflict = true, value = current.Value, version = current.Version };
+                }
 
                 case "forget":
                     if (!string.IsNullOrEmpty(device))

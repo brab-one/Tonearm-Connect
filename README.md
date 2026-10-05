@@ -3,7 +3,8 @@
 A [Lidarr](https://lidarr.audio) plugin that lets the [Tonearm](https://github.com/brab-one/Tonearm-PhoneApp) phone
 app and the [Tonearm desktop app](https://github.com/brab-one/Tonearm-Desktop) see and control each other:
 the phone becomes a remote for the desktop player (play/pause, skip, seek, volume, shuffle, repeat, queue),
-and playback moves between them with **Play this phone's music there** / **Continue on this phone**.
+playback moves between them with **Play this phone's music there** / **Continue on this phone**, and likes of
+YouTube Music songs you don't have yet show up on both.
 
 The short install and setup guide for all parts is in [Tonearm](https://github.com/brab-one/Tonearm).
 
@@ -46,6 +47,12 @@ X-Api-Key: <Lidarr API key>
 | `send` | Queues a command (the payload) for `target` |
 | `poll` | Commands for `device` after `after`, waiting up to `wait` seconds (max 25) for one |
 | `forget` | Removes a device (sent when an app quits) |
+| `get` | A shared document by `key` (e.g. `pending-likes`): its `value` and `version` |
+| `put` | Saves the payload under `key` if the stored version is still `ifVersion`; otherwise answers `conflict` with what's stored |
+
+Devices and commands live in memory. The shared documents (likes of YouTube Music songs that aren't in the
+library yet, so the phone and the desktop show the same ones) are saved in
+`<Lidarr's config folder>/tonearm-connect/store.json`.
 
 Everything is kept in memory: after a Lidarr restart the apps simply announce themselves again.
 

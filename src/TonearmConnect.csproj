@@ -4,7 +4,7 @@
     <!-- Lidarr loads plugins named Lidarr.Plugin.*.dll from <AppData>/plugins/<owner>/<name>/. -->
     <AssemblyName>Lidarr.Plugin.TonearmConnect</AssemblyName>
     <RootNamespace>NzbDrone.Core.Notifications.TonearmConnect</RootNamespace>
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
     <Nullable>disable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>

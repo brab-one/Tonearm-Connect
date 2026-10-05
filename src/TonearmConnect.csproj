@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <!-- Lidarr loads plugins named Lidarr.Plugin.*.dll from <AppData>/plugins/<owner>/<name>/. -->
+    <AssemblyName>Lidarr.Plugin.TonearmConnect</AssemblyName>
+    <RootNamespace>NzbDrone.Core.Notifications.TonearmConnect</RootNamespace>
+    <Version>1.0.0</Version>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <!-- Compiled against the Lidarr release in .lidarr/ (build.sh fetches it); none of it is copied. -->
+    <LidarrPath Condition="'$(LidarrPath)' == ''">$(MSBuildThisFileDirectory)../.lidarr/Lidarr</LidarrPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Lidarr.Core"><HintPath>$(LidarrPath)/Lidarr.Core.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Lidarr.Common"><HintPath>$(LidarrPath)/Lidarr.Common.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="FluentValidation"><HintPath>$(LidarrPath)/FluentValidation.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="NLog"><HintPath>$(LidarrPath)/NLog.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>

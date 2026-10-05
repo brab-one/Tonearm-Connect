@@ -1,0 +1,31 @@
+# Builds the plugin and attaches it to the release, where Lidarr's plugin installer finds it
+# (System → Plugins → https://github.com/brab-one/Tonearm-Connect).
+name: Build plugin
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - run: ./build.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tonearm-connect
+          path: dist/*.zip
+      - name: Attach to the release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${GITHUB_REF_NAME}" dist/*.zip --clobber

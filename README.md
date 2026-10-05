@@ -1,9 +1,11 @@
 # Tonearm Connect
 
-A [Lidarr](https://lidarr.audio) plugin that lets the [Tonearm](https://github.com/brab-one/Tonearm) phone
+A [Lidarr](https://lidarr.audio) plugin that lets the [Tonearm](https://github.com/brab-one/Tonearm-PhoneApp) phone
 app and the [Tonearm desktop app](https://github.com/brab-one/Tonearm-Desktop) see and control each other:
 the phone becomes a remote for the desktop player (play/pause, skip, seek, volume, shuffle, repeat, queue),
 and playback moves between them with **Play this phone's music there** / **Continue on this phone**.
+
+The short install and setup guide for all parts is in [Tonearm](https://github.com/brab-one/Tonearm).
 
 Both apps already reach Lidarr (for requests and Brainarr's picks), often through the same mTLS reverse
 proxy as the music server, so Lidarr relays for them and nothing new has to be exposed.

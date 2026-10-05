@@ -58,3 +58,6 @@ Everything is kept in memory: after a Lidarr restart the apps simply announce th
 Needs the .NET 8 SDK. It fetches a Lidarr release to compile against (nothing of it is shipped) and writes
 `dist/Tonearm-Connect-v<version>.net8.0.zip`. Lidarr's installer picks the release asset whose name contains
 `net8.0.zip`.
+
+## TODO: 
+Move tonearm connect to navidrome as plugin

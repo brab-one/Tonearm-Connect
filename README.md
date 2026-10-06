@@ -8,6 +8,9 @@ YouTube Music songs you don't have yet show up on both.
 
 The short install and setup guide for all parts is in [Tonearm](https://github.com/brab-one/Tonearm).
 
+**No longer used:** since phone 1.9.0 and desktop 1.8.0 the apps only use the [Tonearm server](https://github.com/brab-one/Tonearm-Server)
+for Connect. This plugin can be removed from Lidarr.
+
 For several users on one Navidrome, or without Lidarr, use the [Tonearm server](https://github.com/brab-one/Tonearm-Server)
 instead. The apps (phone 1.5.0+, desktop 1.4.0+) use it whenever it's there and this plugin otherwise.
 
